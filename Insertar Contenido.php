@@ -1,9 +1,15 @@
 <?php
 
 //crear estilo procedimental con libreria mysqli
+$db_host="localhost";
+$db_nombre="blog";
+$db_usuario="root";
+$db_contra="";
+$db_port=3306;
 
-$miconexion=mysqli_connect("localhost", "root", "", "blog");
+//$miconexion=mysqli_connect("localhost", "root", "", "blog");
 
+$miconexion=new mysqli($db_host, $db_usuario, $db_contra, $db_nombre, $db_port);
 
 //comprobar conexion
 if(!$miconexion) {
@@ -52,9 +58,26 @@ if($_FILES ['imagen'] ['error']) { //$_files para subir imagenes al servidor
 
 }
 
-$miconsulta="INSERT INTO CONTENIDO (TIULO, FECHA, COMENTARIO, IMAGEN) VALUES ('TITULO', 'FECHA', 'COMENTARIO', 'IMAGEN')";
+$eltitulo=$_POST['campo_titulo'];
+
+//rescatando fecha con funcion date porque no tenemos formulario con fecha
+$lafecha=date("Y-m-d H:i:s");
+
+$elcomentario=$_POST['area_comentarios'];
+
+//rescatamos tambien el name de la imagen con ['name']
+$laimagen=$_FILES['imagen']['name'];
 
 
+$miconsulta="INSERT INTO CONTENIDO (TITULO, FECHA, COMENTARIO, IMAGEN) VALUES ('$eltitulo', '$lafecha', '$elcomentario', '$laimagen')";
+
+$resultado=mysqli_query($miconexion, $miconsulta);
+
+//CERRAMOS CONEXION
+
+mysqli_close($miconexion);
+
+echo "<br> Se ha agregado el comentario con exito. </br> </br>";
 
 
 ?>

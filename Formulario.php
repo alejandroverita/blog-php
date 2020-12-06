@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Blog Píldoras</title>
+<title>Blog Alejandro</title>
 <style>
 
 h2{
