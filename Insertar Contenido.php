@@ -81,3 +81,8 @@ echo "<br> Se ha agregado el comentario con exito. </br> </br>";
 
 
 ?>
+
+
+<a href="Formulario.php">Añadir nueva entrada </a><br>
+
+<a href ="mostrar_blog.php"> Leer el blog<a>
