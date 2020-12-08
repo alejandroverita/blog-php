@@ -1,7 +1,7 @@
 <?php
 
 //incluir los metodos getters y setters y clases 
-include("objeto_blog.php");
+include_once("objeto_blog.php");
 
 class manejo_objetos {
 
@@ -26,18 +26,18 @@ class manejo_objetos {
 
         $contador=0;
 
-        $resultado=$this->conexion->query("SELECT * FROM CONTENIDO ORDER BY FECHA");
+        $resultado=$this->conexion->query("SELECT * FROM CONTENIDO ORDER BY FECHA DESC");
 
-        //OBJETO BLOB
-        while (($registro=$resultado->fetch(PDO::FETCH_ASSOC)) {
+        //OBJETO BLOG
+        while ($registro=$resultado->fetch(PDO::FETCH_ASSOC)) {
 
-            # INSTANCIA DE LA CLASE OBJETO_BLOG
+        //INSTANCIA DE LA CLASE OBJETO_BLOG
             $blog=new objeto_blog();
 
             $blog->setId($registro["ID"]);
             $blog->setTitulo($registro["TITULO"]);
             $blog->setFecha($registro["FECHA"]);
-            $blog->setComentario($registro["COMENTARIO"]);
+            $blog->setComentarios($registro["COMENTARIO"]);
             $blog->setImagen($registro["IMAGEN"]);
 
         //almacenar dentro del array el primer objeto creado
@@ -52,7 +52,7 @@ class manejo_objetos {
 
     public function insertaContenido(objeto_blog $blog) {
 
-        $sql="INSERT INTO CONTENIDO (TITULO, FECHA, COMENTARIO, IMAGEN) VALUES ('" . $blog->getTitulo() . "', '" . $blog->getFecha() . "', '" . $blog->getComentario() . "', '" . $blog->getImagen() . "')"; 
+        $sql="INSERT INTO CONTENIDO (TITULO, FECHA, COMENTARIO, IMAGEN) VALUES ('" . $blog->getTitulo() . "', '" . $blog->getFecha() . "', '" . $blog->getComentarios() . "', '" . $blog->getImagen() . "')"; 
 
         $this->conexion->exec($sql);
     }

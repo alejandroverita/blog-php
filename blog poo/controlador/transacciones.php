@@ -1,7 +1,7 @@
 <?php
 
-include("../modelo/objeto_blog.php");
-include("../modelo/manejo_objetos.php");
+include_once("../modelo/objeto_blog.php");
+include_once("../modelo/manejo_objetos.php");
 
 try{
     $miconexion=new PDO ('mysql:host=localhost; dbname=blog', 'root', '');
@@ -34,7 +34,7 @@ try{
 
         if((isset($_FILES['imagen']['name']) && ($_FILES['imagen']['error']==UPLOAD_ERR_OK))){
             
-            $destino_de_ruta="imagenes/";
+            $destino_de_ruta="../imagenes/";
 
             //mueve el archivo del directorio temporal: tmp_name a a la ruta imagenes concatenado con el nombre de la imagen
             move_uploaded_file($_FILES['imagen']['tmp_name'], $destino_de_ruta . $_FILES['imagen']['name']);
@@ -56,11 +56,11 @@ try{
 
     $blog->setFecha(Date("Y-m-d H:i:s"));
 
-    $blog->setComentario(htmlentities(addslashes($_POST["area_comentarios"]), ENT_QUOTES));
+    $blog->setComentarios(htmlentities(addslashes($_POST["area_comentarios"]), ENT_QUOTES));
 
     $blog->setImagen($_FILES["imagen"]["name"]);
 
-    $manejo_objetos->iinsertaContenido($blog);
+    $manejo_objetos->insertaContenido($blog);
 
     echo "<br> Entrada exitosa <br>";
 
